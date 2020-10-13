@@ -1,4 +1,5 @@
 #include "general.h"
+#include "inicializar.h"
 #include "stdlib.h"
 #include "math.h"
 

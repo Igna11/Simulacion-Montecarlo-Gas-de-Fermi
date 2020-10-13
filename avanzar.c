@@ -21,7 +21,7 @@ double E_cinetica(double* v, double* p_cuad, double m, int N)
 		//voy calculando la energía cinetica
 		E_cin += p_cuad[i]/(2*m);
 	}
-	return E_cin;
+	return E_cin/N;
 }
 
 double Theta(double* p_cuad, double eta, double L, int N)

@@ -53,7 +53,7 @@ double montecarlo(double* x, double* v, double* X, double *V, double* p_cuad, do
 	for(i = 0; i < N; i++){
 		//escribo un for de 0 a 3, para las 3 coordenadas de cada particula
 		for(j = 0; j < 3; j++){
-			//modifico las 3 coordenadas de la partícula en el vector copia (copia(x) = X)
+			//modifico las 3 coordenadas de la partícula en el vector copia (copia(x) = X)(mayuscula)
 			X[3*i+j] = random()*L;
 			V[3*i+j] = 2*(random()-0.5)*p_f/cbrt(3);
 			//random()-0.5 me da numeros entre -0.5 y 0.5
@@ -70,32 +70,42 @@ double montecarlo(double* x, double* v, double* X, double *V, double* p_cuad, do
 		Delta_E = E_final - E_inicial;
 		//escribo el algoritmo de montecarlo: 
 		if(Delta_E > 0){
+			//si la energía es mayor a 0, defino una probabilidad de aceptacion
 			P_aceptacion = exp(-Delta_E/T);
-		}
-		else{
-			P_aceptacion = 1;
-		}
-		rand = random();
-		//	Si Delta_E > 0 entonces, hay una probabilidad de aceptación del estado,
-		//	Si Delta_E < 0 entonces se acepta directamente.
-		//o sea, uso el vector copia modificado para reescribir las coordenadas
-		//modificadas del vector original
-		if(P_aceptacion > rand){
-			for(j = 0; j < 3; j++){
-				x[3*i+j] = X[3*i+j];
-				v[3*i+j] = V[3*i+j];
-			}
+			//defino un número random uniforme para comparar
+			rand = random();
+			//y si la probabilidad de aceptación es mayor que el número random,
+			//entonces, acepto el estado. Esto es, guardar las coordenadas
+			//modificadas en el vector original
+			if(P_aceptacion > rand){
+				for(j = 0; j < 3; j++){
+					x[3*i+j] = X[3*i+j];
+					v[3*i+j] = V[3*i+j];
+				}
 			//además, redefino el estado de energía inicial como el estado final
 			//porque se aceptó el nuevo estado
 			E_inicial = E_final;
+			}
+			else{
+				//si P_aceptacion < rand no se acepta el estado y
+				//el vector modificado lo vuelvo a su forma inicial
+				E_final = E_inicial;
+				for(j = 0; j < 3; j++){
+					X[3*i+j] = x[3*i+j];
+					V[3*i+j] = v[3*i+j];
+				}
+			}
 		}
 		else{
+			//Si Delta_E < 0 entonces se acepta directamente.
+			//o sea, uso el vector copia modificado para reescribir las coordenadas
+			//modificadas del vector original
 			//Si no acepto el estado, el vector modificado lo vuelvo a su 
 			//estado inicial, copia del vector original x
 			E_final = E_inicial;
 			for(j = 0; j < 3; j++){
-				X[3*i+j] = x[3*i+j];
-				V[3*i+j] = v[3*i+j];
+				x[3*i+j] = X[3*i+j];
+				v[3*i+j] = V[3*i+j];
 			}
 		}
 	}

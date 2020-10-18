@@ -31,12 +31,8 @@ double distribuir_v(double *v, double L, int N)
 		//0 y el impulso de Fermi.
 		//random()-0.5 me da numeros entre -0.5 y 0.5
 		//multiplico por 2 para que me de entre -1 y 1
-		//multiplico por p_f para que me de entre -p_f y p_f
-		//divido por cbrt(3) para normalizar el caso límite
-		//en el que las 3 coordenadas son p_f:
-		//p = (p_f,p_f,p_f): |p| = cbrt(3)p_f, entonces
-		//|p|/cbrt(3) = p_f
- 		v[i] = 13*2*(random()-0.5)*p_f/cbrt(3);
+		//multiplico por p_f para que me de del orden de entre -p_f y 
+ 		v[i] = 2*(random()-0.5)*p_f;
 	}
 	return 0;
 }

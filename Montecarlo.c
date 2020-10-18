@@ -55,14 +55,10 @@ double montecarlo(double* x, double* v, double* X, double *V, double* p_cuad, do
 		for(j = 0; j < 3; j++){
 			//modifico las 3 coordenadas de la partícula en el vector copia (copia(x) = X)(mayuscula)
 			X[3*i+j] = random()*L;
-			V[3*i+j] = 2*(random()-0.5)*p_f/cbrt(3);
+			V[3*i+j] = 2*(random()-0.5)*p_f;
 			//random()-0.5 me da numeros entre -0.5 y 0.5
 			//multiplico por 2 para que me de entre -1 y 1
-			//multiplico por p_f para que me de entre -p_f y p_f
-			//divido por cbrt(3) para normalizar el caso límite
-			//en el que las 3 coordenadas son p_f:
-			//p = (p_f,p_f,p_f): |p| = cbrt(3)p_f, entonces
-			//|p|/cbrt(3) = p_f
+			//multiplico por p_f para que me de del orden de entre -p_f y p_f
 		}
 		//Con el vector copia (modificado) calculo la energía del sistema 
 		//y calculo el delta E

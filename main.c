@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
 	
 //-------REINICIAR LOS MALLOCS ES UNA BUENA PRÁCTICA ESTANDAR---------//
 	for(rho = rho_i; rho < rho_f; rho = rho + paso){
-	
+
 	for(i = 0; i < 3*N; i++){
 		x[i] = 0;
 		v[i] = 0;
@@ -104,13 +104,13 @@ int main(int argc, char *argv[]){
 	double Ener;
 	double E_cin;
 	
-		sprintf(filename, "11 - Ecin_vs_rho - N%i - rho %f.txt",N, rho);
+		sprintf(filename, "02 - Ecin_vs_rho - N%i - rho %f.txt",N, rho);
 		fp = fopen(filename, "w");
 		for(i = 0; i < iteraciones; i++){
 			Ener = montecarlo(x,v,X,V,p_cuad,eta,m,L,N);
 			E_cin = E_cinetica(v, p_cuad, m, N);
-			printf("rho = %f, iteracion N %i,\t Energia = %f\t Energia cinetica = %f\n", rho, i, Ener, E_cin/N);
-			fprintf(fp,"%f\n", E_cin/N);
+			printf("rho = %f, iteracion N%i, Energia cinetica = %f Energia = %f\n", rho, i, E_cin ,Ener);
+			fprintf(fp,"%f\t%f\n", E_cin, Ener);
 		}
 		fclose(fp);
 	}

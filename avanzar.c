@@ -16,7 +16,7 @@ double E_cinetica(double* v, double* p_cuad, double m, int N)
 	}
 	for(i = 0; i < N; i ++){
 		for(k = 0; k < 3; k++){
-			p_cuad[i] += v[3*i+k]*v[3*i+k];
+			p_cuad[i] += m*v[3*i+k]*v[3*i+k];
 		}
 		//voy calculando la energía cinetica
 		E_cin += p_cuad[i]/(2*m);
@@ -47,7 +47,7 @@ double Theta(double* p_cuad, double eta, double L, int N)
 		q = p/p_f;
 		theta += VC/(1 + exp(-eta*(pow(q,2)-1)));
 	}
-	return theta;
+	return theta/N;
 }
 	
 double E_potencial_paper(double* x, double* v, double L, int N)	
@@ -91,7 +91,7 @@ double E_potencial_paper(double* x, double* v, double L, int N)
 			r_ij = p_ij = 0;
 		}
 	}
-	return E_pot_paper;
+	return E_pot_paper/N;
 }
 
 double Energia_paper(double* x, double* v, double* p_cuad, double eta, double m, double L, int N)
@@ -104,5 +104,5 @@ double Energia_paper(double* x, double* v, double* p_cuad, double eta, double m,
 	E_cin = E_cinetica(v, p_cuad, m, N);
 	E_theta = Theta(p_cuad, eta, L, N);
 	E_paper = E_pot + E_cin + E_theta;
-	return E_paper/N;
+	return E_paper;
 }

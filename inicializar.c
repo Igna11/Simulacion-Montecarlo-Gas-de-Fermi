@@ -16,14 +16,12 @@ double distribuir_x(double *x, double L, int N)
 	}
 	return 0;
 }
-double distribuir_v(double *v, double L, int N)
+double distribuir_v(double *v, double p_f, double L, int N)
 {
 	/*distribuye las componentes de las velocidades de forma uniforme
 	solo para la inicialización del sistema. Hay que darle la masa
 	Tener en cuenta que van a ser todas velocidades positivas*/
 	int i;
-	double p_f;
-	p_f = pow(6*N*pow(M_PI,2)/(L*L*L),1/3.0);
 
 	for(i = 0; i < 3*N; i++)
 	{
